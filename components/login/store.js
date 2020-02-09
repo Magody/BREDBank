@@ -5,9 +5,6 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 function verifyUser(user, password){
 
     return new Promise((resolve, reject) =>{
-        
-
-        
 
         let filter = {user: user, password: stringToSha256(password)}
 
