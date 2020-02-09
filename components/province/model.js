@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema; //una de las clases que más se van a utilizar
+const mongoDBTablesNames = require("../../parametros").mongoDBTablesNames
 
 const mySchema = new Schema({  //le indica el tipo de información
 
-    region: {
+    name: {
         type: String,
         required: true,
     }
@@ -12,6 +13,6 @@ const mySchema = new Schema({  //le indica el tipo de información
 
 
 
-const model = mongoose.model('Region', mySchema)  //tabla, esquema
+const model = mongoose.model(mongoDBTablesNames.Province, mySchema)  //tabla, esquema
 
 module.exports = model

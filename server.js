@@ -2,7 +2,10 @@ const express = require('express');  //librería express
 
 const app = express();
 
-const server = require('http').Server(app) // para los web sockets
+
+const server = require('https') // server en https para los web sockets
+
+const serverTest = require('http').Server(app)  //server en http, TO-DO: ELIMINAR ESTA VARIABLE
 
 const cors = require('cors') //permitir accesos
 
@@ -10,17 +13,13 @@ const bodyParser = require("body-parser")
 
 const socket = require('./socket')
 
-
 const db = require('./db')
 
 const router = require('./network/routes')//require('./components/message/network')  //recolecta con export
 
-
 const config = require("./config")
 
 db(config.dbUrl)
-
-
 
 app.set('view-engine', 'ejs')  // permite darle valores personalizados
 app.use(cors())
@@ -55,11 +54,29 @@ app.get("/", function(request, response){
         })*/
 })
 
-
 //app.listen(3001);
 
-server.listen(config.port, function(){  //http://localhost:3003/app/socket.html
-    console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
-})
+var options = {
+    key: config.key,
+    cert: config.cert
+};
 
+/*https://localhost:3000:PUERTO
+
+server.createServer(options, app).listen(config.port, function(){
+    console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
+});
+
+*/
+
+
+/*
+http://localhost:3001
+
+
+
+*/
+serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
+    console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
+})
 

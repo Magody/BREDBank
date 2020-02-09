@@ -1,21 +1,25 @@
 const express = require('express')
-const login = require('../components/login/network')
-const register = require('../components/register/network')
+const login = require('../components/client/login/network')
+const register = require('../components/client/register/network')
 const client = require('../components/client/network');
 const account = require('../components/account/network');
 const transaction = require('../components/transaction/network');
 const movement = require('../components/movement/network');
 const clientAccessLog = require('../components/clientAccessLog/network');
 
+const province = require('../components/province/network');
+
 const routes = function (server) {
     
-    server.use("/login", login);
-    server.use("/register", register);
+    server.use("/client/login", login);
+    server.use("/client/register", register);
     server.use('/client', client );
     server.use('/account', account);
     server.use('/transaction', transaction);
     server.use('/movement', movement);
     server.use('/clientAccessLog', clientAccessLog);
+    server.use('/province', province);
+    
 
 }
 

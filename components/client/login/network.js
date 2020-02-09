@@ -1,7 +1,7 @@
 const express = require('express');  //librería express
 const controller = require('./controller');
 const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
-const res = require("../../network/response");
+const res = require("../../../network/response");
 
 
 router.get("/", function(request, response){

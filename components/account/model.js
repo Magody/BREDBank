@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema; //una de las clases que más se van a utilizar
 
+const mongoDBTablesNames = require("../../parametros").mongoDBTablesNames
 const mySchema = new Schema({ 
 
     client: {
         type: Schema.ObjectId,
-        ref: 'User',
+        ref: mongoDBTablesNames.Client,
     },
     openingDate: {
         type: Date,
@@ -29,7 +30,7 @@ const mySchema = new Schema({
     }
 });
 
-const model = mongoose.model('Account', mySchema)  //tabla, esquema
+const model = mongoose.model(mongoDBTablesNames.Account, mySchema)  //tabla, esquema
 
 module.exports = model
 
