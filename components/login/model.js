@@ -37,6 +37,10 @@ const mySchema = new Schema({
         required: true,
     },
     region: {
+        type: Schema.ObjectId,
+        ref: 'Region',
+    },
+    apiKey: {
         type: String,
         required: true,
     }
