@@ -4,9 +4,9 @@ const response = require('../../network/response');
 const controller = require('./controller');
 
 router.get('/', function (req, res) {
-    controller.getMovements
-        .then((movementList)=> {
-            response.success(req, res, movementList, 201);
+    controller.getRegion
+        .then((regionList)=> {
+            response.success(req, res, regionList, 201);
         })
         .catch((e)=> {
             response.error(req, res, 'Unexpected error', 400, e)
