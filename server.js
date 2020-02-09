@@ -2,7 +2,10 @@ const express = require('express');  //librería express
 
 const app = express();
 
-const server = require('https') // para los web sockets
+
+const server = require('https') // server en https para los web sockets
+
+const serverTest = require('http').Server(app)  //server en http, TO-DO: ELIMINAR ESTA VARIABLE
 
 const cors = require('cors') //permitir accesos
 
@@ -58,5 +61,22 @@ var options = {
     cert: config.cert
 };
 
-server.Server(app);
-server.createServer(options, app).listen(config.port);
+/*https://localhost:3000:PUERTO
+
+server.createServer(options, app).listen(config.port, function(){
+    console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
+});
+
+*/
+
+
+/*
+http://localhost:3001
+
+
+
+*/
+serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
+    console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
+})
+

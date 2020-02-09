@@ -1,8 +1,9 @@
-
+const store = require('./store')
 
 function getMovements() {
     return new Promise((resolve, reject) => {
         resolve(store.list())
+
     });
 }
 
