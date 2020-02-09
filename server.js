@@ -13,7 +13,7 @@ const socket = require('./socket')
 
 const db = require('./db')
 
-const router = require('./module_network/routes')//require('./components/message/network')  //recolecta con export
+const router = require('./network/routes')//require('./components/message/network')  //recolecta con export
 
 
 const config = require("./config")
