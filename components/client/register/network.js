@@ -5,9 +5,9 @@ const controller = require('./controller')
 
 const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
 
-const res = require("../../network/response")
+const res = require("../../../network/response")
 
-const config = require("../../config")
+const config = require("../../../config")
 
 router.get("/", function(request, response){
 
@@ -21,7 +21,7 @@ router.post('/', function(request, response){
         .then((data)=>{
             console.log(data)
             //res.success(request, response, data, 201)
-            response.redirect("/login")
+            response.redirect("/client/login")
         })
         .catch(e => {
             res.error(request, response, "Error interno", 500, e)

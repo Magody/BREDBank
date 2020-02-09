@@ -1,5 +1,5 @@
-const Model = require('./model')
-const stringToSha256 = require("../../module_cryptography/sha").stringToSha256
+const Model = require('../model')
+const stringToSha256 = require("../../../module_cryptography/sha").stringToSha256
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 function verifyUser(user, password){

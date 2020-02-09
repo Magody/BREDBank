@@ -7,9 +7,11 @@ async function connect(url){
         useNewUrlParser: true, //evita problemas de compatibilidad
     })
 
+ 
+
     //async awit no aseguramos que se conecte
 
-    console.log("DB conectada con éxito")
+    console.log("DB conectada con éxito: " + url)
 }
 
 module.exports = connect  //exportamos como la función principal

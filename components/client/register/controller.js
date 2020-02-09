@@ -1,7 +1,7 @@
 const store = require('./store')
 
 
-const stringToSha256 = require("../../module_cryptography/sha").stringToSha256
+const stringToSha256 = require("../../../module_cryptography/sha").stringToSha256
 
 function addUser(user, password, email, region){
 
