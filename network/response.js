@@ -34,7 +34,7 @@ exports.success = function(request, response, message, status){
 
 exports.error = function(request, response, message, status, log){
     //
-    console.log(log)
+    console.log('[response error]: ' + log);
     response.status(status || 500).send({
         error: message,
         body: ''

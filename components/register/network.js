@@ -5,7 +5,7 @@ const controller = require('./controller')
 
 const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
 
-const res = require("../../module_network/response")
+const res = require("../../network/response")
 
 const config = require("../../config")
 
