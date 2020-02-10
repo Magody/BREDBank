@@ -44,6 +44,14 @@ const mySchema = new Schema({
     apiKey: {
         type: String,
         required: false,
+    },
+    apiKeyUses: {
+        type: Number,
+        required: false,
+    },
+    bredPoints: {
+        type: Number,
+        required: false,
     }
 
 });
