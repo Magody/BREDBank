@@ -6,8 +6,10 @@ const account = require('../components/account/network');
 const transaction = require('../components/transaction/network');
 const movement = require('../components/movement/network');
 const clientAccessLog = require('../components/clientAccessLog/network');
-
 const province = require('../components/province/network');
+
+const apiPayment = require('../components/api/payment/network');
+const apiAnalytics = require('../components/api/analytics/network');
 
 const routes = function (server) {
     
@@ -19,6 +21,8 @@ const routes = function (server) {
     server.use('/movement', movement);
     server.use('/clientAccessLog', clientAccessLog);
     server.use('/province', province);
+    server.use('/api/payment', apiPayment);
+    server.use('/api/analytics', apiAnalytics);
     
 
 }

@@ -4,10 +4,19 @@ const mongoDBTablesNames = {
     Movement: "Movement",
     ClientAccessLog:  'ClientAccessLog',
     Account: 'Account',
+    Transaction: 'Transaction',
 
+}
+
+const movements = {
+    deposit:"deposit",
+    withdrawal:"withdrawal",
+    transfer:"transfer",
+    paymentBasicServices:"payment of basic services",
 }
 
 
 module.exports = {
-    mongoDBTablesNames
+    mongoDBTablesNames,
+    movements
 }

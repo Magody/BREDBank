@@ -1,19 +1,21 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema; //una de las clases que más se van a utilizar
+const mongoDBTablesNames = require("../../parametros").mongoDBTablesNames
+
 
 const mySchema = new Schema({ 
 
     movement: {
-        type: Schema.ObjectId,
-        ref: 'Movement',
+        type: String,
+        ref: mongoDBTablesNames.Movement,
     },
     originAccount: {
-        type: Schema.ObjectId,
-        ref: 'Account',
+        type: String,
+        ref: mongoDBTablesNames.Account,
     },
     destinationAccount: {
-        type: Schema.ObjectId,
-        ref: 'Account',
+        type: String,
+        ref: mongoDBTablesNames.Account,
     },
     amount: {
         type: Number,
@@ -27,18 +29,18 @@ const mySchema = new Schema({
         type: Number,
         required: true,
     },
-    descripion: {
+    description: {
         type: String,
-        required: true,
+        required: false,
     },
-    transTime: {  // hora de la transacción
+    transTime: {  
         type: Date,
         required: true,
     },
 
 });
 
-const model = mongoose.model('Transaction', mySchema)  //tabla, esquema
+const model = mongoose.model(mongoDBTablesNames.Transaction , mySchema)  //tabla, esquema
 
 module.exports = model
 
