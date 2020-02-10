@@ -28,7 +28,6 @@ router.post('/', function(request, response){
                                                     '&phone=' + cliente.phone +
                                                     '&email=' + cliente.email + 
                                                     '&balance=' + account.balance);
-
                 })
                 
                 .catch((er)=>{

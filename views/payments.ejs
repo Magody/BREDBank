@@ -1,0 +1,33 @@
+<h1>Payments</h1>
+
+<form  >
+
+    <div>
+        <label for="numberAccount"><p>Origin Account</p></label>
+        <input type="text" id="numberAccount" value="<%= numberAccount %>" style="width: 300px;"  readonly>
+
+        <label for="destinationAccount"><p>Destination Account</p></label>
+        <input type="text" id="destinationAccount" name="destinationAccount" style="width: 300px;"  readonly>
+
+        <p>Please select the movement:</p>
+            <input type="radio" name="gender" value="1"> Deposit<br>
+            <input type="radio" name="gender" value="2"> Retirement<br>
+            <input type="radio" name="gender" value="3"> Basic Services Payments<br>
+            <input type="radio" name="gender" value="4"> Transaction<br>
+
+        <label for="lastname"><p>Amount</p></label>
+        <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
+
+        <button onclick="makePayment()" > Make Payment</button>
+
+    </div>
+
+<script type="text/javascript" > 
+
+    function makePayment(){
+
+    }
+
+</script>
+
+</form>

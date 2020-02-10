@@ -9,9 +9,18 @@ function getAccount(id){
     return store.get(id);
 }
 
-function updateAccount(idAccount, balance) {
+function getAccountByNumAccount(numAccount){
+
+    if(!numAccount){
+        return Promise.reject("Invalid num account");
+    }
+
+    return store.getByNumAccount(numAccount);
+}
+
+function updateAccount(origenAccount,  balance, ) {
     return new Promise( async (resolve, reject) => {
-        if (!idAccount || !balance) {
+        if (!origenAccount || !balance) {
             reject('Los datos son incorrectos');
             return false;
         }
@@ -26,4 +35,5 @@ function updateAccount(idAccount, balance) {
 module.exports = {
     getAccount,
     updateAccount,
+    getAccountByNumAccount
 };
