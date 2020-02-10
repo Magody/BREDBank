@@ -1,43 +1,40 @@
 <h1>Principal</h1>
 
-<form action="/principal" method="GET">
-    <div>
-        <label for="user">Number Account</label>
-        <input type="text" id="user" name="numberAccount" readonly>
-    </div>
+<form action="/client/Login" method="GET">
 
     <div>
-        <label for="identification">Identification</label>
-        <input type="text" id="identification" name="identification" readonly>
+        <label for="numberAccount"><p>Number Account</p></label>
+        <input type="text" id="numberAccount" value="<%= numberAccount %>" style="width: 300px;"  readonly>
+
+        <label for="identification"><p>Identification</p></label>
+        <input type="text" id="identification" name="identification" value="<%= clientIdentificacion %>" style="width: 300px;"  readonly>
+
+        <label for="name"><p>Name</p></label>
+        <input type="text" id="name" name="name"  value="<%= name %>" style="width: 300px;"  readonly>
+
+        <label for="lastname"><p>Lastname</p></label>
+        <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
+
+        <label for="phone"><p>Phone</p> </label>
+        <input type="text" id="phone" name="phone" value="<%= phone %>" style="width: 300px;"   readonly>
+
+        <label for="email"><p>E-mail</p></label>
+        <input type="text" id="email" name="email" value="<%= email %>" style="width: 300px;"  readonly>
+
+        <label for="balance"><p>Balance</p></label>
+        <input type="text" id="balance" name="balance" value="<%= balance %>" style="width: 300px;"  readonly>
     </div>
-
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" readonly>
-    </div>
-
-    <div>
-        <label for="lastname">Lastname</label>
-        <input type="text" id="lastname" name="lastname" readonly>
-    </div>
-
-    <div>
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone" readonly>
-    </div>
-
-    <div>
-        <label for="email">E-mail</label>
-        <input type="text" id="email" name="email" readonly>
-    </div>
-
-    <div>
-        <label for="balance">Balance</label>
-        <input type="text" id="balance" name="balance" readonly>
-    </div>
-
-
-    <button type="submit">Login</button>
+    <br>
+    <ul>
+        <li>
+          <a href="/client/payment" >
+            Payments
+          </a>
+        </li>
+        <li>
+          <a href="/client/search">
+            Search
+          </a>
+        </li>
+    </ul>
 </form>
-
-<a href="/register">Register</a>
