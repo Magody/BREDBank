@@ -12,25 +12,43 @@ router.post('/', function (req, res) {
     if(req.body.operationId == 0){
         controller.generateTransaction(req.body.clientSource, req.body.password,
             req.body.clientDest, req.body.amount, req.body.description,
-            0, movements.transfer, Math.random(), new Date())
+            0, movements.transfer, parseInt(Math.random() * 999999), new Date())
             .then((data)=>{
 
+                
                 if(data.fullClient != null){
-                    var control = controller.sendMail(dataClient.email, "Verification email", "Your code is: "+dataClient.code)
-                    
-                    console.log(control)
-                    
-                    res.send({status: 1, msg: "Mail sent"})
+                    controller.sendMail(data.fullClient.email, "Verification email", "Your code is: "+data.code, data.fullClient.transactionId)
+                        .then((message)=>{
+                            res.send(message)
+                        })
+                        .catch(e=>{
+                            res.send({status: -2, msg: "Cant sent email"})
+                        })
+                        
+                        res.send({status: 1, msg: data.fullClient.transactionId})
                 }else{
-                    res.send({status: 0, msg: data.errorCode})
+                    res.send({status: 0, msg: data.code})
                 }
 
                 
             })
             .catch(e => {
-                res.send({status: -1, msg: "Error interno"})
+                console.log(e)
+                res.send({status: -1, msg: "Internal error"})
             })
-    }else{
+    }else if(req.body.operationId == 1){
+        controller.verifyAndRealicePayment(req.body.transactionId, req.body.code, new Date())
+            .then((message)=>{
+                res.send(message)
+            })
+            .catch(e=>{
+                
+                res.send({status: -1, msg: "Internal error"})
+            })
+
+
+    } 
+    else{
         res.send({status: -1, msg: "Invalid operation"})
     }
 

@@ -37,6 +37,10 @@ const mySchema = new Schema({
         type: Date,
         required: true,
     },
+    province: {  
+        type: String,
+        required: false,
+    },
 
 });
 

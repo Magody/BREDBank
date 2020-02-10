@@ -2,78 +2,106 @@ const ModelClient = require('../../client/model')
 const ModelTransaccion = require('../../transaction/model')
 const ModelMovement = require('../../movement/model')
 const ModelAccount = require('../../account/model')
+const ModelProvince = require('../../province/model')
 
 
-function generateTransaction(clientSource, password, clientDest
-    , amount, description, transactionStatus, movement, 
-    code, dateTimeActual){
+function getTransactionsFromToDate(APIKey, fromDate,toDate, provinces){
 
     return new Promise((resolve, reject) =>{
 
-        let filter = {user: clientSource}
+        let filter = {apiKey: APIKey}
 
         ModelClient.findOne(filter)
-            .then((fullClientSource)=>{
+            .then((fullClient) => {
 
-                console.log(fullClientSource)
+                console.log(fullClient)
 
-                if(!fullClientSource){
-                    if(fullClientSource.password == password){
+                if(fullClient != null){
+                    // se descuenta, uso del apikey
+                    if(fullClient.apiKeyUses == undefined){
+                        fullClient.apiKeyUses = 1
+                    }else{
+                        fullClient.apiKeyUses = fullClient.apiKeyUses + 1
+                    }
 
-                        const movementId =  ModelMovement.findOne({movement: movement})
-                        const accountSourceId =  ModelAccount.findOne({client: fullClientSource._id, accountType : 0})
-
-                        console.log(movementId)
-
-                        console.log(accountSourceId)
-
-                        //const accountDestId =  ModelAccount.findOne({client: movement})
-
-                        
+                    if(fullClient.apiKeyUses < 1000){
 
 
+                        fullClient.save()
 
 
-                        /*new ModelTransaccion({
-                            movement: {
-                                type: Schema.ObjectId,
-                                ref: mongoDBTablesNames.Movement,
-                            },
-                            originAccount: {
-                                type: Schema.ObjectId,
-                                ref: mongoDBTablesNames.Account,
-                            },
-                            destinationAccount: {
-                                type: Schema.ObjectId,
-                                ref: mongoDBTablesNames.Account,
-                            },
-                            amount: amount,
-                            status: status,
-                            code: code,
-                            description: description,
-                            transTime: dateTimeActual,
-                        }).save()*/
+                        const provincesLength = provinces.length
 
-                        resolve({fullClient: null, errorCode: "002"}) //contraseña inválida
+                        var filterProvinces = []
+
+                        if(provincesLength == 0){
+                            filterProvinces = [{}]
+                        }
+
+
+                        for(var i=0; i< provincesLength; i++){
+                            filterProvinces.push({"name": provinces[i]})
+                        }
+
+
+                        ModelProvince.find({ $or: filterProvinces })
+                            .then((listProvinces)=>{
+
+                                var diccionaryProvinces = {}
+                                var filterTransactions = []
+
+                                for(var i=0; i<listProvinces.length; i++){
+                                    diccionaryProvinces[listProvinces[i]._id] = listProvinces[i].name
+                                    filterTransactions.push({province: listProvinces[i]._id})
+                                }
+                                console.log(diccionaryProvinces)
+
+                                ModelTransaccion.find({ $or: filterTransactions })
+                                    .then((listTransactions)=>{
+
+                                        const listTransactionsLength = listTransactions.length
+
+                                        var data = []
+                                        for(var i=0; i<listTransactionsLength; i++){
+                                            
+                                            data.push({date: listTransactions[i].transTime, amount: listTransactions[i].amount, province: diccionaryProvinces[listTransactions[i].province]})
+                                            
+
+                                        }
+
+                                        resolve({status: 1, data,  msg: "Collected: " + listTransactionsLength + " transactions."})
+                                    })
+                                    .catch(e=>{
+                                        resolve({status: 0, data:[],  msg: "Internal error"})
+                                    })
+
+
+                            })
+                            .catch(e=>{
+                                resolve({status: 0, data:[],  msg: "Internal error"})
+                            })
+
 
                     }else{
-                        resolve({fullClient: null, errorCode: "002"}) //contraseña inválida
+                        resolve({status: 0, data:[],  msg: "Usage limit exceded of API"})
                     }
+
+                    
                 }else{
-                    resolve({fullClient: null, errorCode: "001"})  //no existe
+                    resolve({status: 0, data:[],  msg: "No ApiKey"})  //no existe
                 }
                 
 
                 
                 
             })
-            .catch(e => {
-                reject(e)
+            .catch(e=>{
+                resolve({status: 0, data:[],  msg: "No user"})  //no existe
             })
             
     })
 }
 
 module.exports = {
-    generateTransaction: generateTransaction
+    getTransactionsFromToDate
 }

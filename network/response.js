@@ -11,23 +11,12 @@ const statusMessage = {
 
 exports.success = function(request, response, message, status){
     //
-    //response.send(message)
-
-    let statusCode = status
-    let statusMessage = message
-
+    
     if(!status){
         status = 200
     }
 
-    if(!message){
-        statusMessage = statusMessage[status]
-    }
-
-    response.status(status || 200).send({
-        error: '',
-        body: message
-    })
+    response.status(status || 200).send(message)
 
 
 }
@@ -35,8 +24,5 @@ exports.success = function(request, response, message, status){
 exports.error = function(request, response, message, status, log){
     //
     console.log('[response error]: ' + log);
-    response.status(status || 500).send({
-        error: message,
-        body: ''
-    })
+    response.status(status || 500).send(message)
 }
