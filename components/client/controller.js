@@ -1,10 +1,13 @@
+const store = require('./store')
 
-function getClient (clientIdentification) {
-    return new Promise((resolve, reject) => {
-        resolve(store.list(clientIdentification))
-    });
+function getClient(id){
+
+    if(!id){
+        return Promise.reject("Invalid id");
+    }
+
+    return store.get(id);
 }
-
 module.exports = {
     getClient,
 };

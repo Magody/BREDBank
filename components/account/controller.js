@@ -1,9 +1,12 @@
 const store = require('./store');
 
-function getAccount (id) {
-    return new Promise((resolve, reject) => {
-        resolve(store.list(id))
-    });
+function getAccount(id){
+
+    if(!id){
+        return Promise.reject("Invalid id");
+    }
+
+    return store.get(id);
 }
 
 function updateAccount(idAccount, balance) {
@@ -22,4 +25,5 @@ function updateAccount(idAccount, balance) {
 
 module.exports = {
     getAccount,
+    updateAccount,
 };
