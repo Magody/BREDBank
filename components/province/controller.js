@@ -1,11 +1,13 @@
 const store = require('./store')
 
-function getRegion() {
-    return new Promise((resolve, reject) => {
-        resolve(store.list())
-    });
+function getProvince(province) {
+    if(!province){
+        return Promise.reject("Invalid province");
+    }
+
+    return store.get(province);
 }
 
 module.exports = {
-    getRegion
+    getProvince
 }

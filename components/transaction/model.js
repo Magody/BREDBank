@@ -39,7 +39,7 @@ const mySchema = new Schema({
     },
     province: {  
         type: String,
-        required: false,
+        required: mongoDBTablesNames.Province,
     },
 
 });

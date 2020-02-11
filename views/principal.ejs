@@ -8,10 +8,7 @@
         <input type="text" id="identification" name="identification" value="<%= clientIdentificacion %>" style="width: 300px;"  readonly>
 
         <label for="name"><p>Name</p></label>
-        <input type="text" id="name" name="name"  value="<%= name %>" style="width: 300px;"  readonly>
-
-        <label for="lastname"><p>Lastname</p></label>
-        <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
+        <input type="text" id="name" name="name"  value="<%= name %> <%= lastname %>  " style="width: 300px;"  readonly>
         
         <label for="email"><p>E-mail</p></label>
         <input type="text" id="email" name="email" value="<%= email %>" style="width: 300px;"  readonly>
@@ -32,16 +29,21 @@
 
       <div>
         <label for="numberAccount"><p>Origin Account</p></label>
-        <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  >
+        <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  readonly>
 
         <label for="destinationAccount"><p>Destination Account</p></label>
         <input type="text" id="destinationAccount" name="destinationAccount" style="width: 300px;" >
 
-        <p>Please select the movement:</p>
-            <input type="radio" name="movement" value="1"> Deposit<br>
-            <input type="radio" name="movement" value="2"> Retirement<br>
-            <input type="radio" name="movement" value="3"> Basic Services Payments<br>
-            <input type="radio" name="movement" value="4"> Transaction<br>
+        <p>Select the movement:</p>
+            <input type="radio" name="movement" value="Deposit"> Deposit<br>
+            <input type="radio" name="movement" value="Withdrawal"> Withdrawal<br>
+            <input type="radio" name="movement" value="Payment of basic services"> Payment of basic services<br>
+            <input type="radio" name="movement" value="Transfer"> Transfer<br>
+
+        <p>Select the province:</p>
+            <input type="radio" name="province" value="Pichincha"> Pichincha<br>
+            <input type="radio" name="province" value="Guayas"> Guayas<br>
+            <input type="radio" name="province" value="Azuay"> Azuay<br>
 
         <label for="amount"><p>Amount</p></label>
         <input type="text" id="amount" name="amount" style="width: 300px;"   >
