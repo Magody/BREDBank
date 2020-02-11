@@ -22,10 +22,11 @@ router.post('/', function (req, res) {
                             res.send(message)
                         })
                         .catch(e=>{
+                            console.log(e)
                             res.send({status: -2, msg: "Cant sent email"})
                         })
                         
-                        res.send({status: 1, msg: data.fullClient.transactionId})
+                        //res.send({status: 1, msg: data.fullClient.transactionId})
                 }else{
                     res.send({status: 0, msg: data.code})
                 }
