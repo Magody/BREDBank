@@ -42,6 +42,13 @@ app.get("/", function(request, response){
         })*/
 })
 
+app.post("/", function(req, res){
+
+    console.log(req.body)
+    res.send({status:1, data:[], msg:"Hola! te saludo desde el servidor"})
+
+})
+
 app.get("/client/principal", function(request, response){
 
     console.log('Query:', request.query)
