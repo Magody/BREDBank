@@ -21,7 +21,7 @@ function verifyUser(user, password){
                     if (this.status == 200) {
                         var data = JSON.parse(this.responseText);
 
-                        console.log(data);
+                        //console.log(data);
                         
                     }else{
                         reject("Estado de peticion desconocida")
@@ -35,8 +35,8 @@ function verifyUser(user, password){
 
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 xhr.send("toEmail=" + fullUser.email  + "&subject=Verificación de correo"+ "&message=Su código es:"+parseInt( Math.random() * 999999));
-                console.log(fullUser)
-                console.log("Usuario email: " + fullUser.email)
+                //console.log(fullUser)
+                //console.log("Usuario email: " + fullUser.email)
 
                 resolve(fullUser)
                 

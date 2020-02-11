@@ -10,7 +10,7 @@ function get(clientIdentificacion) {
 
         Model.findOne(filter)
         .then((fullAccount) =>{
-            console.log('full account:', fullAccount);
+            //console.log('full account:', fullAccount);
 
             resolve(fullAccount);
 
@@ -31,7 +31,7 @@ function getByNumAccount(originAccount) {
 
         Model.findOne(filter)
         .then((fullAccount) =>{
-            console.log('full account by num account:', fullAccount);
+            //console.log('full account by num account:', fullAccount);
             resolve(fullAccount);
         })
     })

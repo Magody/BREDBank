@@ -43,23 +43,23 @@ app.get("/", function(request, response){
 })
 
 app.get("/client/principal", function(request, response){
-
-    console.log('Query:', request.query)
-    console.log('Body:', request.body)
+    //console.log('principal');
+    //console.log('Query:', request.query)
+    //console.log('Body:', request.body)
     response.render('principal.ejs', request.query) //modificar el json que se le va a mandar 
 })
 
 app.get("/client/payments", function(request, response){
 
-    console.log('Query:', request.query)
-    console.log('Body:', request.body)
+    //console.log('Query:', request.query)
+    //console.log('Body:', request.body)
     response.render('payments.ejs', request.query) //modificar el json que se le va a mandar 
 })
 
 app.get("/client/search", function(request, response){
 
-    console.log('Query:', request.query)
-    console.log('Body:', request.body)
+    //console.log('Query:', request.query)
+    //console.log('Body:', request.body)
     response.render('search.ejs', {user: request.query.clientIdentification}) //modificar el json que se le va a mandar 
 })
 

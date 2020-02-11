@@ -7,7 +7,7 @@ const mySchema = new Schema({
 
     movement: {
         type: String,
-        ref: true,
+        ref: mongoDBTablesNames.Movement,
     },
     originAccount: {
         type: String,

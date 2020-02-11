@@ -2,32 +2,35 @@
 
 <form  >
 
-    <div>
-        <label for="numberAccount"><p>Origin Account</p></label>
-        <input type="text" id="numberAccount" value="<%= numberAccount %>" style="width: 300px;"  readonly>
 
-        <label for="destinationAccount"><p>Destination Account</p></label>
-        <input type="text" id="destinationAccount" name="destinationAccount" style="width: 300px;"  readonly>
 
-        <p>Please select the movement:</p>
-            <input type="radio" name="gender" value="1"> Deposit<br>
-            <input type="radio" name="gender" value="2"> Retirement<br>
-            <input type="radio" name="gender" value="3"> Basic Services Payments<br>
-            <input type="radio" name="gender" value="4"> Transaction<br>
+    <script type="text/javascript"  >
+        
+        function makePayment() {
 
-        <label for="lastname"><p>Amount</p></label>
-        <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
+            const express = require('express');  //librería express
+const controller = require('./controller');
+const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
+const res = require("../../../network/response");
+const controllerPayments = require('../payment/controller');
+const controllerAccount = require('../../account/controller');
 
-        <button onclick="makePayment()" > Make Payment</button>
+    //borrar la base y crearla de nuevo sin movements
+    //realizar todas las validaciones
+    if (document.getElementsById('amount').value === '123') {//propia cuenta
 
-    </div>
+        console.log('pay');
 
-<script type="text/javascript" > 
-
-    function makePayment(){
-
+        // controllerAccount.getAccountByNumAccount(request.body.numberAccount)
+        // .then(()=>{
+        //     controllerAccount.updateAccount(request.body.numberAccount, )
+        // })
+        // .catch(()=>{
+            
+        // })
+        }
     }
 
-</script>
+    </script>
 
 </form>

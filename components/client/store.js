@@ -11,7 +11,7 @@ function get(id) {
         Model.findOne(filter)
         
         .then((fullClient) =>{
-            console.log('full cliente:', fullClient);
+            //console.log('full cliente:', fullClient);
 
             resolve(fullClient);
 

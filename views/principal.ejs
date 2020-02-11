@@ -1,7 +1,5 @@
 <h1>Principal</h1>
 
-<form action="/client/Login" method="GET">
-
     <div>
         <label for="numberAccount"><p>Number Account</p></label>
         <input type="text" id="numberAccount" value="<%= numberAccount %>" style="width: 300px;"  readonly>
@@ -14,10 +12,7 @@
 
         <label for="lastname"><p>Lastname</p></label>
         <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
-
-        <label for="phone"><p>Phone</p> </label>
-        <input type="text" id="phone" name="phone" value="<%= phone %>" style="width: 300px;"   readonly>
-
+        
         <label for="email"><p>E-mail</p></label>
         <input type="text" id="email" name="email" value="<%= email %>" style="width: 300px;"  readonly>
 
@@ -25,14 +20,44 @@
         <input type="text" id="balance" name="balance" value="<%= balance %>" style="width: 300px;"  readonly>
     </div>
     <br>
+    <hr>
+    <hr>
+    <center>
+      <p style="margin: 0 auto; display: inline-block; " >PAYMENTS</p>
+    </center>
+   
+    <hr>
+    <hr>
+    <form action="/client/payments" method="POST">
+
+      <div>
+        <label for="numberAccount"><p>Origin Account</p></label>
+        <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  >
+
+        <label for="destinationAccount"><p>Destination Account</p></label>
+        <input type="text" id="destinationAccount" name="destinationAccount" style="width: 300px;" >
+
+        <p>Please select the movement:</p>
+            <input type="radio" name="movement" value="1"> Deposit<br>
+            <input type="radio" name="movement" value="2"> Retirement<br>
+            <input type="radio" name="movement" value="3"> Basic Services Payments<br>
+            <input type="radio" name="movement" value="4"> Transaction<br>
+
+        <label for="amount"><p>Amount</p></label>
+        <input type="text" id="amount" name="amount" style="width: 300px;"   >
+
+        <br>
+        <button type="submit"> Make Payment</button>
+
+      </div>
+
+    </form>
+
+
+
     <ul>
         <li>
-          <a href="/client/payment/?numberAccount=<%= numberAccount %>" >
-            Payments
-          </a>
-        </li>
-        <li>
-          <a href="/client/search">
+          <a href="/client/search?numberAccount=<%= numberAccount %>">
             Search
           </a>
         </li>

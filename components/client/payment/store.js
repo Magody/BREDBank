@@ -9,7 +9,7 @@ function get(_originAccount) {
 
         Model.find(filter)
         .then((transactions) =>{
-            console.log('full payments:', transactions);
+            //console.log('full payments:', transactions);
             resolve(fullAccount);
 
         })

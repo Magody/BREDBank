@@ -5,7 +5,7 @@ function getAccount(id){
     if(!id){
         return Promise.reject("Invalid id");
     }
-
+    //console.log('id getaccount:', id);
     return store.get(id);
 }
 
