@@ -18,13 +18,14 @@ function generateTransaction(clientSource, password, clientDest
                 if(fullClientSource != null){
                     if(fullClientSource.password == password){
 
-
+                        console.log('movement:', movement );
                         ModelMovement.findOne({movement: movement})
                             .then((fullMovement)=>{
 
                                 ModelAccount.findOne({client: fullClientSource._id, accountType: 0})
                                     .then((fullAccountSource)=>{
-
+                                        console.log('debug clientDes:', );
+                                        console.log(clientDest);
                                         let filter = {user: clientDest}
 
                                         ModelClient.findOne(filter)
@@ -68,22 +69,26 @@ function generateTransaction(clientSource, password, clientDest
 
                                                     })
                                                     .catch(e=>{
+                                                        console.log(e);
                                                         resolve({fullClient: null, code: "007"})  //no existe la cuenta de origen
                                                     })
 
                                             })
                                             .catch(e=>{
+                                                console.log(e);
                                                 resolve({fullClient: null, code: "006"})  //no existe el usuario de destino
                                             })
 
 
                                     })
                                     .catch(e=>{
+                                        console.log(e);
                                         resolve({fullClient: null, code: "005"})  //no existe la cuenta de origen
                                     })
 
                             })
                             .catch(e=>{
+                                console.log(e);
                                 resolve({fullClient: null, code: "004"})  //no existe ese tipo de movimiento
                             })
 
@@ -91,6 +96,7 @@ function generateTransaction(clientSource, password, clientDest
                         resolve({fullClient: null, code: "002"}) //contraseña inválida
                     }
                 }else{
+                    
                     resolve({fullClient: null, code: "001"})  //no existe
                 }
                 
