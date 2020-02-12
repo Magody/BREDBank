@@ -96,18 +96,24 @@ var options = {
 
 
 
-/*https://localhost:3000:PUERTO
+/*
+https://localhost:3000:PUERTO
+
+*/
+
+socket.connect(server)  // servidor de sockets conectado
+
 
 server.createServer(options, app).listen(config.port, function(){
     console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 });
 
-*/
+
 
 
 /*
 http://localhost:3001
-*/
+
 
 
 socket.connect(serverTest)  // servidor de sockets conectado
@@ -115,3 +121,4 @@ socket.connect(serverTest)  // servidor de sockets conectado
 serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
     console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
 })
+*/

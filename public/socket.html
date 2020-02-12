@@ -2,6 +2,8 @@
     <head>
         <!--Ese archivo socket lo genera automáticamente-->
         <script src="/socket.io/socket.io.js"></script>
+        <script src="../require.js"></script>
+
     </head>
     <body>
         <h1>Mira la consola.</h1>
@@ -9,25 +11,25 @@
         <button id="boton">Boton</button>
 
         <script>
+            
 
+            console.log('http://' + config.IP_HOST + ':' + config.port)
 
-            document.getElementById("boton").innerHTML = "Cambio";
-            document.getElementById("boton").click();
-
-            var socket = io.connect('http://172.29.64.160:3000', {
+            var socket = io.connect('http://' + config.IP_HOST + ':' + config.port, {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
+
             //console.log(socket)
 
             socket.on("mensaje", function(data){
                 console.log(data)
             }) 
-            
+
             socket.on("alertaIntruso", function(data){
-                alert("Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
+                alert(data)
             }) 
-            
-            
+
+
             // ahora escucha mensajes (WebSockets)
 
             /*window.addEventListener('beforeunload', function (e) { 

@@ -1,5 +1,6 @@
 const ModelClient = require('../model')
 const ModelClientLogs = require('../../clientAccessLog/model')
+const ModelAccount = require('../../account/model')
 const listaSockets = require('../../../socket').listaSockets
                             
 var clientesConectados = {}
@@ -21,7 +22,7 @@ function authClient(client, fullClientAccessLog){
                     if(fullClient.password == client.password){
                         
 
-                        ModelClientLogs.findOne({client: fullClient._id, lastIp: fullClientAccessLog.connIP})
+                        ModelClientLogs.findOne({client: fullClient._id, connIP: fullClientAccessLog.connIP})
                         
                             .then((fullLog)=>{
 
@@ -40,6 +41,7 @@ function authClient(client, fullClientAccessLog){
 
                             })
                             .catch(e=>{
+                                console.log(e)
                                 reject(e)
                             })
 
@@ -56,6 +58,7 @@ function authClient(client, fullClientAccessLog){
                 
             })
             .catch(e => {
+                console.log(e)
                 reject(e)
             })
 
@@ -72,7 +75,9 @@ function comprobarConexionCliente(clientId, clientIp){
 
     console.log(clientesConectados)
     if (clientesConectados[clientId] == undefined) { 
-		//no hay sesión previa activa, es su primer ingreso
+        //no hay sesión previa activa, es su primer ingreso
+        console.log("Clientes")
+        console.log(clientesConectados)
 		return false;		
 	} else { 
 		//Ya hay una sesión activa
@@ -88,10 +93,45 @@ function notificarAccesoACliente(cliente){
 
 }
 
+function obtenerUrlRedireccion(userId, ip){
+
+
+    return new Promise((resolve, reject)=>{
+        ModelClient.findOne({_id: userId})
+        .then((cliente)=>{
+            //console.log('cliente:', cliente);
+        
+            ModelAccount.findOne({client: cliente._id})
+                .then((account)=> {
+                    
+                    clientesConectados[cliente._id]  = ip 
+
+
+                    resolve('/client/principal/?numberAccount=' + account._id + 
+                                                    '&clientIdentificacion=' + cliente.clientIdentificacion + 
+                                                    '&name=' + cliente.name +
+                                                    '&lastname=' + cliente.lastname + 
+                                                    '&phone=' + cliente.phone +
+                                                    '&email=' + cliente.email + 
+                                                    '&balance=' + account.balance); //se envía a la pantalla principal con todos sus datos
+
+                })
+                .catch((er)=>{
+                    console.log(er)
+                    reject(er)
+                })
+        }).catch(e=>{
+            console.log(e)
+            reject(e)
+        })
+    })
+}
+
 
 module.exports = {
     auth: authClient,
     comprobarConexionCliente,
     clientesConectados,
-    notificarCliente: notificarAccesoACliente
+    notificarCliente: notificarAccesoACliente,
+    obtenerUrlRedireccion: obtenerUrlRedireccion
 }

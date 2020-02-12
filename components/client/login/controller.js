@@ -72,9 +72,22 @@ function notificarAccesoACliente(cliente){
 
 }
 
+function obtenerUrlDeRedireccion(userId, ip){
+    return new Promise((resolve, reject)=>{
+
+
+        
+
+        resolve(store.obtenerUrlRedireccion(userId, ip))
+    })
+    
+    
+}
+
 module.exports = {
     authClient,
     existeConeccionActiva,
     sendMail,
-    notificarAccesoACliente
+    notificarAccesoACliente,
+    obtenerUrlDeRedireccion
 }
