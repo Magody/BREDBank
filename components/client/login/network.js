@@ -114,8 +114,18 @@ router.post('/', function(req, res){
 
                 
             } else if (resultado == resultadosCodigos.ID_DISPOSITIVO_CONOCIDO.valor){ // credenciales correctas, ip conocida
-                response.success(req, res, resultadosCodigos.ID_DISPOSITIVO_CONOCIDO.mensaje, 200)
                 
+
+
+                controller.obtenerURLDeRedireccion(cliente._id, connIP)
+                    .then((url)=>{
+                        res.redirect(url)
+                    })
+                    .catch(e=>{
+                        response.error(req, res, "Error interno", 500, e)
+                    })
+
+
             }
 
 

@@ -6,17 +6,13 @@
     <body>
         <h1>Mira la consola.</h1>
 
-        <button id="boton">Boton</button>
 
         <script>
-
-
-            document.getElementById("boton").innerHTML = "Cambio";
-            document.getElementById("boton").click();
 
             var socket = io.connect('http://172.29.64.160:3000', {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
+
             //console.log(socket)
 
             socket.on("mensaje", function(data){

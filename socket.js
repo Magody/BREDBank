@@ -19,6 +19,7 @@ function connect(server){
 
         var client_ip_address = socket.request.connection.remoteAddress;
         const ip = client_ip_address.replace("::ffff:", "")
+
         listaSockets[ip] = {socket: socket, time: new Date()}
     
     

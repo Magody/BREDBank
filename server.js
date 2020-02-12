@@ -98,6 +98,7 @@ var options = {
 
 /*https://localhost:3000:PUERTO
 
+socket.connect(server)  // servidor de sockets conectado
 server.createServer(options, app).listen(config.port, function(){
     console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 });
