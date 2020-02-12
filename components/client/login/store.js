@@ -1,7 +1,9 @@
 const ModelClient = require('../model')
 const ModelAccount = require('../../account/model')
 const ModelClientLogs = require('../../clientAccessLog/model')
+
 const ModelClientAccessLog = require('../../clientAccessLog/model')
+
 const listaSockets = require('../../../socket').listaSockets
                             
 var clientesConectados = {}
@@ -73,10 +75,11 @@ function authClient(client, fullClientAccessLog){
 
 
 function comprobarConexionCliente(clientId, clientIp){
-
+console.log("Clientes")
     console.log(clientesConectados)
     if (clientesConectados[clientId] == undefined) { 
         //no hay sesión previa activa, es su primer ingreso
+
         
 		return false;		
 	} else { 
@@ -97,10 +100,12 @@ function notificarAccesoACliente(cliente){
 }
 
 function obtenerURLDeRedireccion(userId, ip){
+
     return new Promise((resolve, reject)=>{
         ModelClient.findOne({_id: userId})
         .then((cliente)=>{
             //console.log('cliente:', cliente);
+
             clientesConectados[cliente._id]  = ip  //creo una sesión activa y le asocio a su IP
 
             const newLog = new ModelClientAccessLog({
@@ -114,6 +119,7 @@ function obtenerURLDeRedireccion(userId, ip){
             ModelAccount.findOne({client: cliente._id})
                 .then((account)=> {
                     
+
                     resolve('/client/principal/?numberAccount=' + account._id + 
                                                     '&clientIdentificacion=' + cliente.clientIdentificacion + 
                                                     '&name=' + cliente.name +

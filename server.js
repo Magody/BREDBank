@@ -100,15 +100,26 @@ https://localhost:3000:PUERTO
 socket.connect(server)  // servidor de sockets conectado
 
 
+
 //socket.socket.io.set('origins', 'localhost');
+
+
+/*
+https://localhost:3000:PUERTO
+
+socket.connect(server)  // servidor de sockets conectado
+
+
 server.createServer(options, app).listen(config.port, function(){
     console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 });
 
 
+
 */
 
 /*
+
 http://localhost:3001*/
 
 

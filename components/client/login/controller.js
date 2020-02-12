@@ -82,6 +82,18 @@ function obtenerURLDeRedireccion(userId, ip){
     })
 }
 
+function obtenerUrlDeRedireccion(userId, ip){
+    return new Promise((resolve, reject)=>{
+
+
+        
+
+        resolve(store.obtenerUrlRedireccion(userId, ip))
+    })
+    
+    
+}
+
 module.exports = {
     authClient,
     existeConeccionActiva,

@@ -66,7 +66,7 @@ router.post('/', function(req, res){
                     
                     //es el primer logeo
                     
-                    controller.sendMail(cliente.email, "Verification email", "Your code is: "+cliente.verificationCode)
+                    /*controller.sendMail(cliente.email, "Verification email", "Your code is: "+cliente.verificationCode)
                         .then((enviado)=>{
                             
                             if(enviado){
@@ -85,12 +85,12 @@ router.post('/', function(req, res){
                         })
                         .catch(e=>{
                             response.error(req, res, "Error al enviar el correo", 500, e)
-                        })
+                        })*/
 
 
                         //esto solo para testear
                     
-                        /*res.send('<form id="redirectVerification" method="post" action="/client/verification">' +
+                        res.send('<form id="redirectVerification" method="post" action="/client/verification">' +
                         '<input type="hidden" name="user" value="'+ cliente.user+ '">' +
                         '<input type="hidden" name="email" value="'+ cliente.email + '">' + 
                         '<input type="hidden" name="userId" value="'+ cliente._id + '">' +
@@ -98,7 +98,7 @@ router.post('/', function(req, res){
                         '<input type="hidden" name="connIp" value="'+ connIP + '">' +                   
                         '</form>' +
                         '<script>document.getElementById("redirectVerification").submit()</script>');
-                    */
+                    
 
 
                    
@@ -116,8 +116,8 @@ router.post('/', function(req, res){
             } else if (resultado == resultadosCodigos.ID_DISPOSITIVO_CONOCIDO.valor){ // credenciales correctas, ip conocida
                 
 
-
                 controller.obtenerURLDeRedireccion(cliente._id, connIP)
+
                     .then((url)=>{
                         res.redirect(url)
                     })
