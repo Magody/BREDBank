@@ -1,7 +1,5 @@
 <h1>Principal</h1>
 
-<form action="/client/Login" method="GET">
-
     <div>
         <label for="numberAccount"><p>Number Account</p></label>
         <input type="text" id="numberAccount" value="<%= numberAccount %>" style="width: 300px;"  readonly>
@@ -10,14 +8,8 @@
         <input type="text" id="identification" name="identification" value="<%= clientIdentificacion %>" style="width: 300px;"  readonly>
 
         <label for="name"><p>Name</p></label>
-        <input type="text" id="name" name="name"  value="<%= name %>" style="width: 300px;"  readonly>
-
-        <label for="lastname"><p>Lastname</p></label>
-        <input type="text" id="lastname" name="lastname"  value="<%= lastname %>" style="width: 300px;"   readonly>
-
-        <label for="phone"><p>Phone</p> </label>
-        <input type="text" id="phone" name="phone" value="<%= phone %>" style="width: 300px;"   readonly>
-
+        <input type="text" id="name" name="name"  value="<%= name %> <%= lastname %>  " style="width: 300px;"  readonly>
+        
         <label for="email"><p>E-mail</p></label>
         <input type="text" id="email" name="email" value="<%= email %>" style="width: 300px;"  readonly>
 
@@ -25,14 +17,44 @@
         <input type="text" id="balance" name="balance" value="<%= balance %>" style="width: 300px;"  readonly>
     </div>
     <br>
+    <hr>
+    <hr>
+    <center>
+      <p style="margin: 0 auto; display: inline-block; " >PAYMENTS</p>
+    </center>
+   
+    <hr>
+    <hr>
+    <form action="/client/payments" method="POST">
+
+      <div>
+        <label for="numberAccount"><p>Origin Account</p></label>
+        <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  readonly>
+
+        <label for="destinationAccountT"><p>Destination Account</p></label>
+        <input type="text" id="destinationAccountT" name="destinationAccountT" style="width: 300px;" >
+
+        <p>Select the movement:</p>
+            <input type="radio" name="movement" value="Deposit" checked > Deposit<br>
+            <input type="radio" name="movement" value="Withdrawal"> Withdrawal<br>
+            <input type="radio" name="movement" value="Payment of basic services"> Payment of basic services<br>
+            <input type="radio" name="movement" value="Transfer"> Transfer<br>
+
+        <label for="amount"><p>Amount</p></label>
+        <input type="text" id="amount" name="amount" style="width: 300px;" required  >
+
+        <br>
+        <button type="submit"> Make Payment</button>
+
+      </div>
+
+    </form>
+
+
+
     <ul>
         <li>
-          <a href="/client/payment" >
-            Payments
-          </a>
-        </li>
-        <li>
-          <a href="/client/search">
+          <a href="/client/search?numberAccount=<%= numberAccount %>">
             Search
           </a>
         </li>

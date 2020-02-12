@@ -8,6 +8,7 @@ function getClient(id){
 
     return store.get(id);
 }
+
 module.exports = {
     getClient,
 };

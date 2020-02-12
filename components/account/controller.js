@@ -5,25 +5,33 @@ function getAccount(id){
     if(!id){
         return Promise.reject("Invalid id");
     }
-
+    //console.log('id getaccount:', id);
     return store.get(id);
 }
 
-function updateAccount(idAccount, balance) {
-    return new Promise( async (resolve, reject) => {
-        if (!idAccount || !balance) {
+function getAccountByNumAccount(numAccount){
+
+    if(!numAccount){
+        return Promise.reject("Invalid num account");
+    }
+
+    return store.getByNumAccount(numAccount);
+}
+
+function updateAccount(origenAccount,  newBalance, ) {
+    console.log('update Account controller' + origenAccount + ' ' + newBalance)
+
+        if (!origenAccount || !newBalance) {
             reject('Los datos son incorrectos');
-            return false;
+            return Promise.reject('Invalid data ');
         }
         
-        const result = await store.updateBalance(idAccount, balance);
-        resolve(result);
-
-    });
+        return store.updateAccount(origenAccount, newBalance);
 }
 
 
 module.exports = {
     getAccount,
     updateAccount,
+    getAccountByNumAccount
 };

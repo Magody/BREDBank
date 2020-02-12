@@ -1,12 +1,15 @@
 const store = require('./store')
 
-function getMovements() {
-    return new Promise((resolve, reject) => {
-        resolve(store.list())
+function getMovement(movement){
 
-    });
+    if(!movement){
+        return Promise.reject("Invalid movement");
+    }
+
+    return store.get(movement);
 }
 
+
 module.exports = {
-    getMovements
+    getMovement
 }

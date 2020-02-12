@@ -1,0 +1,36 @@
+<h1>Payments</h1>
+
+<form  >
+
+
+
+    <script type="text/javascript"  >
+        
+        function makePayment() {
+
+            const express = require('express');  //librería express
+const controller = require('./controller');
+const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
+const res = require("../../../network/response");
+const controllerPayments = require('../payment/controller');
+const controllerAccount = require('../../account/controller');
+
+    //borrar la base y crearla de nuevo sin movements
+    //realizar todas las validaciones
+    if (document.getElementsById('amount').value === '123') {//propia cuenta
+
+        console.log('pay');
+
+        // controllerAccount.getAccountByNumAccount(request.body.numberAccount)
+        // .then(()=>{
+        //     controllerAccount.updateAccount(request.body.numberAccount, )
+        // })
+        // .catch(()=>{
+            
+        // })
+        }
+    }
+
+    </script>
+
+</form>

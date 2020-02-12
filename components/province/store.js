@@ -1,26 +1,25 @@
-const Model = require('./model')
+const Model = require('./model');
 
+function get(_province) {
+    console.log('llego a store get provinces ' + _province)
+    return new Promise((resolve, reject) => {
+        let filter= {
+            _id: _province 
+        };
 
+        Model.findOne(filter)
+        .then((provinces) =>{
+            resolve(provinces);
 
-function listRegions(){
-
-    return new Promise((resolve, reject) =>{
-
-        
-
-        Model.find()
-            .then((fullRegions)=>{
-                console.log(fullRegions)
-                resolve(fullRegions)
-                
-            })
-            .catch(e => {
-                reject(e)
-            })
-            
+        })
+        .catch(e => {
+            reject(e);
+        })
     })
+
 }
 
+
 module.exports = {
-    list: listRegions
+    get,
 }

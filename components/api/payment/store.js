@@ -36,7 +36,7 @@ function generateTransaction(clientSource, password, clientDest
 
                                                         if(fullAccountSource.balance - amount >= 0){ //si tiene para pagar
 
-
+                                                            
                                                             //console.log(fullMovement)
                                                             //console.log(fullAccountSource)
                                                             //console.log(fullAccountDest)

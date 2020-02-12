@@ -2,6 +2,23 @@ const Model = require('../model')
 const stringToSha256 = require("../../../module_cryptography/sha").stringToSha256
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+function verifyUserSinCorreo(user, password){
+
+    return new Promise((resolve, reject) =>{
+
+        let filter = {user: user, password: stringToSha256(password)}
+
+        Model.findOne(filter)
+            .then((fullUser)=>{
+                resolve(fullUser)
+            })
+            .catch(e => {
+                reject(e)
+            })
+            
+    })
+}
+
 function verifyUser(user, password){
 
     return new Promise((resolve, reject) =>{
@@ -21,7 +38,7 @@ function verifyUser(user, password){
                     if (this.status == 200) {
                         var data = JSON.parse(this.responseText);
 
-                        console.log(data);
+                        //console.log(data);
                         
                     }else{
                         reject("Estado de peticion desconocida")
@@ -35,8 +52,8 @@ function verifyUser(user, password){
 
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
                 xhr.send("toEmail=" + fullUser.email  + "&subject=Verificación de correo"+ "&message=Su código es:"+parseInt( Math.random() * 999999));
-                console.log(fullUser)
-                console.log("Usuario email: " + fullUser.email)
+                //console.log(fullUser)
+                //console.log("Usuario email: " + fullUser.email)
 
                 resolve(fullUser)
                 
@@ -49,5 +66,6 @@ function verifyUser(user, password){
 }
 
 module.exports = {
-    verify: verifyUser
+    verify: verifyUser,
+    verifyUserSinCorreo
 }

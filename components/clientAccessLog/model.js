@@ -6,7 +6,7 @@ const mySchema = new Schema({  //le indica el tipo de información
 
     client: {
         type: Schema.ObjectId,
-        ref: 'User',
+        ref: mongoDBTablesNames.Client,
     },
     connIP: { // IP de la cual se hizo una conexión
         type: String,
