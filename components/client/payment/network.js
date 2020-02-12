@@ -126,8 +126,6 @@ router.post('/', function(request, response){
                 res.error(request, response, "Error interno client", 500, e)
             })
 
-
-
         })
         .catch((e)=>{
             res.error(request, response, "Error interno account", 500, e)

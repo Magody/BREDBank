@@ -18,7 +18,7 @@ function get(originAccount) {
     
     return new Promise((resolve, reject) => {
         let filter = {
-            client: originAccount
+            originAccount: originAccount
         };
 
         Model.find(filter)
