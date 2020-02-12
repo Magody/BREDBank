@@ -8,14 +8,13 @@
     <body>
         <h1>Mira la consola.</h1>
 
-        <button id="boton">Boton</button>
 
         <script>
+        
+        
+            var socket = io.connect('http://172.29.64.160:3000/', {secure: true}, {
             
 
-            console.log('http://' + config.IP_HOST + ':' + config.port)
-
-            var socket = io.connect('http://' + config.IP_HOST + ':' + config.port, {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
 
@@ -39,6 +38,8 @@
 
 
             }); */
+
+
         </script>
     </body>
 </html>

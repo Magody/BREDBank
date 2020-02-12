@@ -1,6 +1,9 @@
 const ModelClient = require('../model')
-const ModelClientLogs = require('../../clientAccessLog/model')
 const ModelAccount = require('../../account/model')
+const ModelClientLogs = require('../../clientAccessLog/model')
+
+const ModelClientAccessLog = require('../../clientAccessLog/model')
+
 const listaSockets = require('../../../socket').listaSockets
                             
 var clientesConectados = {}
@@ -72,12 +75,12 @@ function authClient(client, fullClientAccessLog){
 
 
 function comprobarConexionCliente(clientId, clientIp){
-
+console.log("Clientes")
     console.log(clientesConectados)
     if (clientesConectados[clientId] == undefined) { 
         //no hay sesión previa activa, es su primer ingreso
-        console.log("Clientes")
-        console.log(clientesConectados)
+
+        
 		return false;		
 	} else { 
 		//Ya hay una sesión activa
@@ -89,23 +92,33 @@ function comprobarConexionCliente(clientId, clientIp){
 function notificarAccesoACliente(cliente){
     
     const connIP = clientesConectados[cliente._id]
+
+    console.log(connIP)
+    console.log("Sockets: ", listaSockets)
     listaSockets[connIP].socket.emit("alertaIntruso", "Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
 
 }
 
-function obtenerUrlRedireccion(userId, ip){
-
+function obtenerURLDeRedireccion(userId, ip){
 
     return new Promise((resolve, reject)=>{
         ModelClient.findOne({_id: userId})
         .then((cliente)=>{
             //console.log('cliente:', cliente);
-        
+
+            clientesConectados[cliente._id]  = ip  //creo una sesión activa y le asocio a su IP
+
+            const newLog = new ModelClientAccessLog({
+                client: cliente._id,
+                connIP: ip,
+                connTime: new Date()
+            });
+            newLog.save();
+
+
             ModelAccount.findOne({client: cliente._id})
                 .then((account)=> {
                     
-                    clientesConectados[cliente._id]  = ip 
-
 
                     resolve('/client/principal/?numberAccount=' + account._id + 
                                                     '&clientIdentificacion=' + cliente.clientIdentificacion + 
@@ -132,6 +145,6 @@ module.exports = {
     auth: authClient,
     comprobarConexionCliente,
     clientesConectados,
-    notificarCliente: notificarAccesoACliente,
-    obtenerUrlRedireccion: obtenerUrlRedireccion
+    notificarAccesoACliente: notificarAccesoACliente,
+    obtenerURLDeRedireccion
 }

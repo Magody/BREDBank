@@ -67,9 +67,19 @@ function existeConeccionActiva(clientId, clientIp){
     return store.comprobarConexionCliente(clientId, clientIp)
 }
 
-function notificarAccesoACliente(cliente){
-    store.notificarCliente(cliente)
+function notificarAccesoACliente(userId){
+    return new Promise((resolve, reject)=>{
 
+        resolve(store.notificarAccesoACliente(userId))
+    })
+
+}
+
+function obtenerURLDeRedireccion(userId, ip){
+    return new Promise((resolve, reject)=>{
+
+        resolve(store.obtenerURLDeRedireccion(userId, ip))
+    })
 }
 
 function obtenerUrlDeRedireccion(userId, ip){
@@ -89,5 +99,5 @@ module.exports = {
     existeConeccionActiva,
     sendMail,
     notificarAccesoACliente,
-    obtenerUrlDeRedireccion
+    obtenerURLDeRedireccion
 }

@@ -56,7 +56,7 @@ router.post('/', function(req, res){
 	
                     //es un intento de hackeo
 
-                    controller.notificarAccesoACliente(cliente);
+                    controller.notificarAccesoACliente(cliente._id);
                         
                     res.render("loginDenegado.ejs")
                     
@@ -115,7 +115,9 @@ router.post('/', function(req, res){
                 
             } else if (resultado == resultadosCodigos.ID_DISPOSITIVO_CONOCIDO.valor){ // credenciales correctas, ip conocida
                 
-                controller.obtenerUrlDeRedireccion(cliente._id, connIP)
+
+                controller.obtenerURLDeRedireccion(cliente._id, connIP)
+
                     .then((url)=>{
                         res.redirect(url)
                     })

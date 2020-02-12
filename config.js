@@ -11,6 +11,7 @@ const config = {
     files: process.env.PUBLIC_ROUTE_FILES || '/files',
     key: fs.readFileSync('./keys/server.key'),
     cert: fs.readFileSync('./keys/server.crt'),
+    ca: fs.readFileSync('./keys/ca.crt'),
     emailServiceHost: process.env.EMAIL_HOST || "https://www.deusgallet.com/sendmail.php"
     
 }
