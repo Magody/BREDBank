@@ -52,6 +52,10 @@ const mySchema = new Schema({
     bredPoints: {
         type: Number,
         required: false,
+    },
+    verificationCode: {
+        type: Number,
+        required: false
     }
 
 });

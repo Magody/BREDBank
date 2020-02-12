@@ -1,5 +1,6 @@
 const express = require('express');
 const login = require('../components/client/login/network');
+const verification = require('../components/client/verification/network');
 const register = require('../components/client/register/network');
 const payment = require('../components/client/payment/network');
 const client = require('../components/client/network');
@@ -17,6 +18,7 @@ const routes = function (server) {
     server.use("/client/login", login);
     server.use("/client/register", register);
     server.use("/client/payments", payment);
+    server.use("/client/verification", verification);
     server.use("/client/search", search);
     server.use('/client', client );
     server.use('/account', account);
