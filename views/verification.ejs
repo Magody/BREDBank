@@ -1,0 +1,28 @@
+<style>
+    
+    *{
+        width: 100%;
+        height: auto;
+        text-align: center
+    }
+
+</style>
+
+
+<h1 style="font-style: italic; color: darkgreen;">Hola <%= user %></h1>
+<h2>Ingrese el código enviado a <%= email %></h1>
+
+<form action="/client/verification" method="POST">
+    <div>
+        <input type="hidden" name="user" value=<%= user %> >
+        <input type="hidden" name="email" value=<%= email %> >
+        <input type="hidden" name="userId" value=<%= userId %> >
+        <input type="hidden" name="intentos" value=<%= intentos %> >
+        <input type="hidden" name="connIp" value=<%= connIp %> >
+        <label id="id" for="code">Código</label>
+        <input type="number" id="code" name="code" required>
+    </div>
+    <button type="submit">Verificar</button>
+</form>
+
+<h3 style="color: rgb(48, 48, 117);"><%= mensaje %></h1>
