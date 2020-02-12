@@ -24,10 +24,13 @@ function addTransaction(_idMovement, _originAccount, _destinationAccount , _amou
             return store.add(fullTransaction);
 }
 
-function getTransaction (originAccount) {
-    return new Promise((resolve, reject) => {
-        resolve(store.list(originAccount))
-    });
+function getTransaction(originAccount){
+
+    if(!originAccount ){
+        return Promise.reject("Invalid data ");
+    }
+
+    return store.get(originAccount);
 }
 
 module.exports = {

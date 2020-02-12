@@ -2,6 +2,23 @@ const Model = require('../model')
 const stringToSha256 = require("../../../module_cryptography/sha").stringToSha256
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+function verifyUserSinCorreo(user, password){
+
+    return new Promise((resolve, reject) =>{
+
+        let filter = {user: user, password: stringToSha256(password)}
+
+        Model.findOne(filter)
+            .then((fullUser)=>{
+                resolve(fullUser)
+            })
+            .catch(e => {
+                reject(e)
+            })
+            
+    })
+}
+
 function verifyUser(user, password){
 
     return new Promise((resolve, reject) =>{
@@ -49,5 +66,6 @@ function verifyUser(user, password){
 }
 
 module.exports = {
-    verify: verifyUser
+    verify: verifyUser,
+    verifyUserSinCorreo
 }

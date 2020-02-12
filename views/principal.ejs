@@ -31,17 +31,17 @@
         <label for="numberAccount"><p>Origin Account</p></label>
         <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  readonly>
 
-        <label for="destinationAccount"><p>Destination Account</p></label>
-        <input type="text" id="destinationAccount" name="destinationAccount" style="width: 300px;" >
+        <label for="destinationAccountT"><p>Destination Account</p></label>
+        <input type="text" id="destinationAccountT" name="destinationAccountT" style="width: 300px;" >
 
         <p>Select the movement:</p>
-            <input type="radio" name="movement" value="Deposit"> Deposit<br>
+            <input type="radio" name="movement" value="Deposit" checked > Deposit<br>
             <input type="radio" name="movement" value="Withdrawal"> Withdrawal<br>
             <input type="radio" name="movement" value="Payment of basic services"> Payment of basic services<br>
             <input type="radio" name="movement" value="Transfer"> Transfer<br>
 
         <label for="amount"><p>Amount</p></label>
-        <input type="text" id="amount" name="amount" style="width: 300px;"   >
+        <input type="text" id="amount" name="amount" style="width: 300px;" required  >
 
         <br>
         <button type="submit"> Make Payment</button>
