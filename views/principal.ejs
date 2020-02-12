@@ -19,16 +19,18 @@
     <br>
     <hr>
     <hr>
+
     <center>
       <p style="margin: 0 auto; display: inline-block; " >PAYMENTS</p>
     </center>
    
     <hr>
     <hr>
+
     <form action="/client/payments" method="POST">
 
       <div>
-        <label for="numberAccount"><p>Origin Account</p></label>
+        <label for="numberAccountT"><p>Origin Account</p></label>
         <input type="text" id="numberAccountT" name="numberAccountT" value="<%= numberAccount %>" style="width: 300px;"  readonly>
 
         <label for="destinationAccountT"><p>Destination Account</p></label>
@@ -50,13 +52,13 @@
 
     </form>
 
+    <form action="/client/search" method="POST">
 
+        <label for="numberAccountS" >Number Account</label>
+        <input type="text" id="numberAccountS" name="numberAccountS" value="<%= numberAccount %>" style="width: 300px;"  readonly>
+        <br>
+        <br>
+        <br>
+        <button type="submit"> View Account transactions </button>
 
-    <ul>
-        <li>
-          <a href="/client/search?numberAccount=<%= numberAccount %>">
-            Search
-          </a>
-        </li>
-    </ul>
-</form>
+    </form>
