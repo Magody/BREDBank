@@ -18,7 +18,11 @@ app.use(bodyParser.json());  //define el tipo de datos a enviar
 app.use(bodyParser.urlencoded({extended: true})); //extended para objetos complejos
 //app.use(router);
 
-socket.connect(server)  // servidor de sockets conectado
+
+
+
+
+
 router(app)
 
 //servir estáticos
@@ -26,6 +30,11 @@ app.use(config.publicRoute, express.static('public'));
 
 app.get("/", function(request, response){
 
+    var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
+    
+    ip = ip.replace("::ffff:", "")  //reemplaza la sección de IPV6 y solo deja IPV4
+
+    console.log("IP: " + ip)
     console.log(request.query)
     console.log(request.body)
     response.render('index.ejs', {user: request.query.user})
@@ -44,8 +53,9 @@ app.get("/", function(request, response){
 
 app.post("/", function(req, res){
 
+    var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
     console.log(req.body)
-    res.send({status:1, data:[], msg:"Hola! te saludo desde el servidor"})
+    res.send({status:1, data:[], msg:"Hola!, " + ip +  " te saludo desde el servidor"})
 
 })
 
@@ -81,6 +91,11 @@ var options = {
     cert: config.cert
 };
 
+
+
+
+
+
 /*https://localhost:3000:PUERTO
 
 server.createServer(options, app).listen(config.port, function(){
@@ -93,7 +108,10 @@ server.createServer(options, app).listen(config.port, function(){
 /*
 http://localhost:3001
 */
+
+
+socket.connect(serverTest)  // servidor de sockets conectado
+
 serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
     console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
 })
-

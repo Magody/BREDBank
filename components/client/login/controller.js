@@ -1,29 +1,80 @@
 const store = require('./store')
 
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const stringToSha256 = require('../../../module_cryptography/sha').stringToSha256
+const config = require('../../../config')
 
-function verifyUser(user, password){
+function sendMail(email, subject, message){
 
-    if(!user || !password){
-        //si no necesitamos la promesa completa
-        return Promise.reject("Invalid user or password");
-    }
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", config.emailServiceHost, true);
 
-    return store.verify(user, password)
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    
+                    resolve(true)
+                    
+                }else{
+                    reject(false)
+                }
+            }
+
+            
+        };
+
+        
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhr.send("toEmail=" + email  + "&subject="+ subject + "&message="+message);
+    });
+
+
+    
+
+    
 }
 
-function verifyUserSinCorreo(user, password){
 
-    if(!user || !password){
-        //si no necesitamos la promesa completa
-        return Promise.reject("Invalid user or password");
-    }
+function authClient(user, password, connIP){
 
-    return store.verifyUserSinCorreo(user, password)
+
+    return new Promise((resolve, reject)=>{
+
+        if(!user || !password || !connIP){
+            reject("Datos inválidos para el login")
+            
+        }
+
+        const client = {
+            user: user,
+            password: stringToSha256(password)
+        }
+    
+        var fullClientAccessLog = {
+            client: null,  //require la id solo se tiene el nombre
+            connIP: connIP,
+            connTime: new Date()
+        };
+
+        resolve(store.auth(client, fullClientAccessLog))
+    })
+
 }
 
+function existeConeccionActiva(clientId, clientIp){
 
+    return store.comprobarConexionCliente(clientId, clientIp)
+}
+
+function notificarAccesoACliente(cliente){
+    store.notificarCliente(cliente)
+
+}
 
 module.exports = {
-    verifyUser,
-    verifyUserSinCorreo
+    authClient,
+    existeConeccionActiva,
+    sendMail,
+    notificarAccesoACliente
 }

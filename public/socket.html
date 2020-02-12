@@ -5,15 +5,38 @@
     </head>
     <body>
         <h1>Mira la consola.</h1>
+
+        <button id="boton">Boton</button>
+
         <script>
-            var socket = io.connect('http://localhost:3003', {
+
+
+            document.getElementById("boton").innerHTML = "Cambio";
+            document.getElementById("boton").click();
+
+            var socket = io.connect('http://172.29.64.160:3000', {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
-            console.log(socket)
+            //console.log(socket)
 
             socket.on("mensaje", function(data){
                 console.log(data)
-            })  // ahora escucha mensajes (WebSockets)
+            }) 
+            
+            socket.on("alertaIntruso", function(data){
+                alert("Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
+            }) 
+            
+            
+            // ahora escucha mensajes (WebSockets)
+
+            /*window.addEventListener('beforeunload', function (e) { 
+                e.preventDefault(); 
+                e.returnValue = '';
+                socket.disconnect()
+
+
+            }); */
         </script>
     </body>
 </html>

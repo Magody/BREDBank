@@ -1,71 +1,97 @@
-const Model = require('../model')
-const stringToSha256 = require("../../../module_cryptography/sha").stringToSha256
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const ModelClient = require('../model')
+const ModelClientLogs = require('../../clientAccessLog/model')
+const listaSockets = require('../../../socket').listaSockets
+                            
+var clientesConectados = {}
 
-function verifyUserSinCorreo(user, password){
+function authClient(client, fullClientAccessLog){
 
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject)=>{
+        
+        let filter = {user: client.user}
 
-        let filter = {user: user, password: stringToSha256(password)}
+        //console.log(filter)
+        ModelClient.findOne(filter)
+            .then((fullClient)=>{
 
-        Model.findOne(filter)
-            .then((fullUser)=>{
-                resolve(fullUser)
-            })
-            .catch(e => {
-                reject(e)
-            })
-            
-    })
-}
+                //console.log(fullClient)
+                
+                if(fullClient != null){  //existe
 
-function verifyUser(user, password){
-
-    return new Promise((resolve, reject) =>{
-
-        let filter = {user: user, password: stringToSha256(password)}
-
-        Model.findOne(filter)
-            .then((fullUser)=>{
-
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "https://www.deusgallet.com/sendmail.php", true);
-
-                xhr.onreadystatechange = function (fullUser) {
-                    if (this.readyState != 4) 
-                        return //no está listo
-
-                    if (this.status == 200) {
-                        var data = JSON.parse(this.responseText);
-
-                        //console.log(data);
+                    if(fullClient.password == client.password){
                         
+
+                        ModelClientLogs.findOne({client: fullClient._id, lastIp: fullClientAccessLog.connIP})
+                        
+                            .then((fullLog)=>{
+
+                                console.log(fullLog)
+                                if(fullLog != null){  //dispositivo conocido: hacerle ingresar directamente
+                                    resolve({id: 2, cliente: fullClient});
+                                }else{
+                                    //registra el codigo
+                                    const code = 100000 + parseInt(Math.random() * 899999)
+                                    console.log("Codigo generado: " + code)
+                                    fullClient.verificationCode = code
+                                    fullClient.save() //agrega el código
+
+                                    resolve({id: 1, cliente: fullClient}); //dispositivo desconocido: Puede ser un Hacker o un ingreso por primera vez
+                                }
+
+                            })
+                            .catch(e=>{
+                                reject(e)
+                            })
+
+                    
                     }else{
-                        reject("Estado de peticion desconocida")
+                        resolve({id: 0, cliente: fullClient}); //contraseña incorrecta
                     }
-
-                    // end of state change: it can be after some time (async)
-                };
-
-
-
-
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                xhr.send("toEmail=" + fullUser.email  + "&subject=Verificación de correo"+ "&message=Su código es:"+parseInt( Math.random() * 999999));
-                //console.log(fullUser)
-                //console.log("Usuario email: " + fullUser.email)
-
-                resolve(fullUser)
+            
+                }else{ // no existe el usuario
+            
+                    resolve({id: -1, cliente: fullClient});
+            
+                }
                 
             })
             .catch(e => {
                 reject(e)
             })
-            
+
+
+
+
+
     })
+
 }
 
+
+function comprobarConexionCliente(clientId, clientIp){
+
+    console.log(clientesConectados)
+    if (clientesConectados[clientId] == undefined) { 
+		//no hay sesión previa activa, es su primer ingreso
+		return false;		
+	} else { 
+		//Ya hay una sesión activa
+		return true		
+	}
+
+}
+
+function notificarAccesoACliente(cliente){
+    
+    const connIP = clientesConectados[cliente._id]
+    listaSockets[connIP].socket.emit("alertaIntruso", "Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
+
+}
+
+
 module.exports = {
-    verify: verifyUser,
-    verifyUserSinCorreo
+    auth: authClient,
+    comprobarConexionCliente,
+    clientesConectados,
+    notificarCliente: notificarAccesoACliente
 }
