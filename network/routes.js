@@ -9,7 +9,7 @@ const transaction = require('../components/transaction/network');
 const movement = require('../components/movement/network');
 const clientAccessLog = require('../components/clientAccessLog/network');
 const province = require('../components/province/network');
-
+const search = require('../components/client/search/network');
 const apiPayment = require('../components/api/payment/network');
 const apiAnalytics = require('../components/api/analytics/network');
 
@@ -19,6 +19,7 @@ const routes = function (server) {
     server.use("/client/register", register);
     server.use("/client/payments", payment);
     server.use("/client/verification", verification);
+    server.use("/client/search", search);
     server.use('/client', client );
     server.use('/account', account);
     server.use('/transaction', transaction);

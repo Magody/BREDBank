@@ -63,21 +63,21 @@ app.get("/client/principal", function(request, response){
     //console.log('principal');
     //console.log('Query:', request.query)
     //console.log('Body:', request.body)
-    response.render('principal.ejs', request.query) //modificar el json que se le va a mandar 
+    response.render('principal.ejs', request.query);
 })
 
 app.get("/client/payments", function(request, response){
 
     //console.log('Query:', request.query)
     //console.log('Body:', request.body)
-    response.render('payments.ejs', request.query) //modificar el json que se le va a mandar 
+    response.render('payments.ejs', request.query); 
 })
 
 app.get("/client/search", function(request, response){
 
     //console.log('Query:', request.query)
     //console.log('Body:', request.body)
-    response.render('search.ejs', {user: request.query.clientIdentification}) //modificar el json que se le va a mandar 
+    response.render('search.ejs',request.query);
 })
 
 //app.listen(3001);
