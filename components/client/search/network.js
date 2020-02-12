@@ -3,10 +3,6 @@ const controller = require('./controller');
 const router = express.Router();  //permite separar cabeceras, métodos, por url, etc
 const res = require("../../../network/response");
 const controllerTransaction = require('../../transaction/controller');
-const controllerProvince= require('../../province/controller');
-const controllerMovement = require('../../movement/controller');
-const controllerAccount = require('../../account/controller');
-const controllerClient = require('../controller');
 
 router.get("/", function(request, response){
 
