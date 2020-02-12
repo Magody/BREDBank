@@ -9,10 +9,10 @@ const mongoDBTablesNames = {
 }
 
 const movements = {
-    deposit:"deposit",
-    withdrawal:"withdrawal",
-    transfer:"transfer",
-    paymentBasicServices:"payment of basic services",
+    deposit:"Deposit",
+    withdrawal:"Withdrawal",
+    transfer:"Transfer",
+    paymentBasicServices:"Payment of basic services",
 }
 
 

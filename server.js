@@ -53,7 +53,7 @@ app.get("/", function(request, response){
 
 app.post("/", function(req, res){
 
-    var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
+    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     console.log(req.body)
     res.send({status:1, data:[], msg:"Hola!, " + ip +  " te saludo desde el servidor"})
 
