@@ -89,6 +89,9 @@ function comprobarConexionCliente(clientId, clientIp){
 function notificarAccesoACliente(cliente){
     
     const connIP = clientesConectados[cliente._id]
+
+    console.log(connIP)
+    console.log("Sockets: ", listaSockets)
     listaSockets[connIP].socket.emit("alertaIntruso", "Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
 
 }
@@ -136,6 +139,6 @@ module.exports = {
     auth: authClient,
     comprobarConexionCliente,
     clientesConectados,
-    notificarCliente: notificarAccesoACliente,
+    notificarAccesoACliente: notificarAccesoACliente,
     obtenerURLDeRedireccion
 }

@@ -70,7 +70,7 @@ function existeConeccionActiva(clientId, clientIp){
 function notificarAccesoACliente(userId){
     return new Promise((resolve, reject)=>{
 
-        resolve(userId)
+        resolve(store.notificarAccesoACliente(userId))
     })
 
 }

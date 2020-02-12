@@ -12,7 +12,7 @@ const config = require("./config");
 db(config.dbUrl)
 
 app.set('view-engine', 'ejs');  // permite darle valores personalizados
-app.use(cors());
+//app.use(cors());
 
 app.use(bodyParser.json());  //define el tipo de datos a enviar
 app.use(bodyParser.urlencoded({extended: true})); //extended para objetos complejos
@@ -53,7 +53,7 @@ app.get("/", function(request, response){
 
 app.post("/", function(req, res){
 
-    var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
+    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     console.log(req.body)
     res.send({status:1, data:[], msg:"Hola!, " + ip +  " te saludo desde el servidor"})
 
@@ -85,30 +85,32 @@ app.get("/client/search", function(request, response){
 
 
 // STARTING SERVER
-
+/*
 var options = {
     key: config.key,
-    cert: config.cert
+    cert: config.cert,
+    ca: config.ca,
+    requestCert: false,
+    rejectUnauthorized: false
 };
 
 
-
-
-
-
-/*https://localhost:3000:PUERTO
+https://localhost:3000:PUERTO
 
 socket.connect(server)  // servidor de sockets conectado
+
+
+//socket.socket.io.set('origins', 'localhost');
 server.createServer(options, app).listen(config.port, function(){
     console.log("La aplicación está escuchando en " + config.host + ":" + config.port);
 });
 
-*/
 
+*/
 
 /*
-http://localhost:3001
-*/
+http://localhost:3001*/
+
 
 
 socket.connect(serverTest)  // servidor de sockets conectado
@@ -116,3 +118,4 @@ socket.connect(serverTest)  // servidor de sockets conectado
 serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
     console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
 })
+

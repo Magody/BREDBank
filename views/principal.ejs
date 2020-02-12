@@ -76,9 +76,9 @@
 <script>
 
 
-    var socket = io.connect('http://172.29.64.160:3000', {
-        forceNew: true,  //que las conexiones siempre sean nuevas
-    })
+var socket = io.connect('http://172.29.64.160:3000', {
+                forceNew: true,  //que las conexiones siempre sean nuevas
+            })
     //console.log(socket)
 
     socket.on("mensaje", function(data){

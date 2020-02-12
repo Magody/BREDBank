@@ -8,8 +8,9 @@
 
 
         <script>
-
-            var socket = io.connect('http://172.29.64.160:3000', {
+        
+        
+            var socket = io.connect('http://172.29.64.160:3000/', {secure: true}, {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
 
@@ -33,6 +34,8 @@
 
 
             }); */
+
+
         </script>
     </body>
 </html>

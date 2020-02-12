@@ -56,7 +56,7 @@ router.post('/', function(req, res){
 	
                     //es un intento de hackeo
 
-                    controller.notificarAccesoACliente(cliente);
+                    controller.notificarAccesoACliente(cliente._id);
                         
                     res.render("loginDenegado.ejs")
                     
