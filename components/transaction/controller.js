@@ -2,14 +2,14 @@ const store = require('./store');
 
 function addTransaction(_idMovement, _originAccount, _destinationAccount , _amount, _idProvince) {
 
-    console.log('en add transaction:' +  _idMovement + _originAccount + _destinationAccount + _amount + _idProvince )
+    console.log('en add transaction:' +  _idMovement + ' ' + _originAccount + ' ' + _destinationAccount + ' ' +  _amount + ' ' +  _idProvince )
 
-            if(!_idMovement || !_originAccount || !_destinationAccount || !_amount || _idProvince) {
+            if(!_idMovement || !_originAccount || !_destinationAccount || !_amount || !_idProvince) {
                 console.log('[transaction controller]: No hay el tipo de movimiento, cuenta de origen, cuenta de desitno o la cantidad de la transacción' );
                 return Promise.reject("Invalid province");
             }
 
-            fullTransaction = {
+            let fullTransaction = {
                 movement: _idMovement,
                 originAccount: _originAccount,
                 destinationAccount: _destinationAccount,
@@ -21,10 +21,7 @@ function addTransaction(_idMovement, _originAccount, _destinationAccount , _amou
                 province: _idProvince
             };
 
-            return store.
-        
-    ;
-
+            return store.add(fullTransaction);
 }
 
 function getTransaction (originAccount) {

@@ -18,17 +18,15 @@ function getAccountByNumAccount(numAccount){
     return store.getByNumAccount(numAccount);
 }
 
-function updateAccount(origenAccount,  balance, ) {
-    return new Promise( async (resolve, reject) => {
-        if (!origenAccount || !balance) {
+function updateAccount(origenAccount,  newBalance, ) {
+    console.log('update Account controller' + origenAccount + ' ' + newBalance)
+
+        if (!origenAccount || !newBalance) {
             reject('Los datos son incorrectos');
-            return false;
+            return Promise.reject('Invalid data ');
         }
         
-        const result = await store.updateBalance(idAccount, balance);
-        resolve(result);
-
-    });
+        return store.updateAccount(origenAccount, newBalance);
 }
 
 

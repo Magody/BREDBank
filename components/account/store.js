@@ -40,7 +40,28 @@ function getByNumAccount(originAccount) {
     })
 }
 
+function updateAccount(id, balance) {
+    
+    return new Promise((resolve, reject) => {
+        let filter = {
+            _id: id
+        };
+
+        Model.findOne(filter)
+        .then((foundAccount) =>{
+            foundAccount.balance = balance;
+            const newBalance = foundAccount.save();
+            resolve(newBalance);
+        })
+    })
+    .catch(e => {
+        reject(e);
+    })
+
+}
+
 module.exports = {
     get,
-    getByNumAccount
+    getByNumAccount,
+    updateAccount
 }
