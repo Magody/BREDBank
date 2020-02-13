@@ -80,6 +80,12 @@ app.get("/client/search", function(request, response){
     response.render('search.ejs',request.query);
 })
 
+app.get("/client/cambioCredenciales", function(request, response){
+
+    //console.log('Query:', request.query)
+    //console.log('Body:', request.body)
+    response.render('cambioCredenciales.ejs',request.query);
+})
 //app.listen(3001);
 
 

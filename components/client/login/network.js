@@ -31,7 +31,7 @@ router.post('/', function(req, res){
     controller.authClient(req.body.user, req.body.password, connIP)
         .then((resultadoCompleto)=>{
             // resultadoCompleto ejemplo: {id: 2, cliente: cliente}
-
+            console.log('debug authCLiente', resultadoCompleto.id);
             
             const resultado = resultadoCompleto.id;
             const cliente = resultadoCompleto.cliente
@@ -57,8 +57,17 @@ router.post('/', function(req, res){
                     //es un intento de hackeo
 
                     controller.notificarAccesoACliente(cliente._id);
-                        
-                    res.render("loginDenegado.ejs")
+                    console.log('cliente user:', cliente.user);
+                    res.redirect('/client/cambioCredenciales/?user='+ cliente.user);
+                    // res.send('<form id="redirectCambioCredenciales" method="post" action="/client/cambioCredenciales">' +
+                    // '<input type="hidden" name="user" value="'+ cliente.user+ '">' +
+                    // '<input type="password" name="password" required>' +                   
+                    // '</form>' +
+                    // '<script>document.getElementById("redirectVerification").submit()</script>');
+
+                    //res.render("loginDenegado.ejs");
+                   
+                   
                     
                 } else {
                 
@@ -90,14 +99,14 @@ router.post('/', function(req, res){
 
                         //esto solo para testear
                     
-                        res.send('<form id="redirectVerification" method="post" action="/client/verification">' +
-                        '<input type="hidden" name="user" value="'+ cliente.user+ '">' +
-                        '<input type="hidden" name="email" value="'+ cliente.email + '">' + 
-                        '<input type="hidden" name="userId" value="'+ cliente._id + '">' +
-                        '<input type="hidden" name="intentos" value="'+ 0 + '">' +
-                        '<input type="hidden" name="connIp" value="'+ connIP + '">' +                   
-                        '</form>' +
-                        '<script>document.getElementById("redirectVerification").submit()</script>');
+                        // res.send('<form id="redirectVerification" method="post" action="/client/verification">' +
+                        // '<input type="hidden" name="user" value="'+ cliente.user+ '">' +
+                        // '<input type="hidden" name="email" value="'+ cliente.email + '">' + 
+                        // '<input type="hidden" name="userId" value="'+ cliente._id + '">' +
+                        // '<input type="hidden" name="intentos" value="'+ 0 + '">' +
+                        // '<input type="hidden" name="connIp" value="'+ connIP + '">' +                   
+                        // '</form>' +
+                        // '<script>document.getElementById("redirectVerification").submit()</script>');
                     
 
 

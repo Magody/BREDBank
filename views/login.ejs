@@ -1,12 +1,4 @@
-<style>
-    
-    *{
-        width: 100%;
-        height: auto;
-        text-align: center
-    }
 
-</style>
 
 <h1>Login</h1>
 
@@ -14,15 +6,17 @@
 
 <form action="/client/login" method="POST">
     <div>
-        <label for="user">User</label>
+        <label for="user">Usuario</label>
+        <br>
         <input type="text" id="user" name="user" required>
     </div>
-
+    <br>
     <div>
-        <label for="password">Password</label>
+        <label for="password">Contraseña</label>
+        <br>
         <input type="password" id="password" name="password" required>
     </div>
-
+    <br>
     <button type="submit">Login</button>
 </form>
 

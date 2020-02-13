@@ -16,7 +16,6 @@
             var socket = io.connect('http://172.29.64.160:3000/', {secure: true}, {
             //const config = require('../config')
         
-            var socket = io.connect('http://' + config.IP_HOST + ':' + config.port, {
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
 
