@@ -13,7 +13,7 @@ function verifyCode(client, ip){
         .then((fullClient)=>{
 
 
-            //console.log(fullClient)
+            console.log('verificar ip antes:', ip);
 
             if(fullClient.verificationCode != undefined){
                 if(fullClient.verificationCode == client.verificationCode){
@@ -23,9 +23,10 @@ function verifyCode(client, ip){
                         connIP: ip,
                         connTime: new Date()
                     });
+                    console.log('log total antes:', newLog);
                     newLog.save(); //se genera un log al verificar el código
 
-
+                    console.log('log total despues:', newLog );
 
 		            clientesConectados[client._id]  = ip  //creo una sesión activa y le asocio a su IP
 
@@ -43,7 +44,7 @@ function verifyCode(client, ip){
             
         })
         .catch(e=>{
-            console.log(e)
+            console.log('catch: ', e);
             reject(e)
         })
 
