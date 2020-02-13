@@ -72,9 +72,11 @@ function obtenerUrlDeRedireccion(userId){
 
                 })
                 .catch((er)=>{
+                    console.log(e)
                     reject(er)
                 })
         }).catch(e=>{
+            console.log(e)
             reject(e)
         })
     })
