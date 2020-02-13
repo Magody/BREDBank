@@ -91,16 +91,9 @@ app.get("/client/cambioCredenciales", function(request, response){
 
 
 // STARTING SERVER
+
+
 /*
-var options = {
-    key: config.key,
-    cert: config.cert,
-    ca: config.ca,
-    requestCert: false,
-    rejectUnauthorized: false
-};
-
-
 https://localhost:3000:PUERTO
 
 socket.connect(server)  // servidor de sockets conectado
@@ -112,7 +105,15 @@ socket.connect(server)  // servidor de sockets conectado
 
 /*
 https://localhost:3000:PUERTO
+*/
 
+var options = {
+    key: config.key,
+    cert: config.cert,
+    ca: config.ca,
+    requestCert: false,
+    rejectUnauthorized: false
+};
 socket.connect(server)  // servidor de sockets conectado
 
 
@@ -122,11 +123,11 @@ server.createServer(options, app).listen(config.port, function(){
 
 
 
-*/
+
 
 /*
 
-http://localhost:3001*/
+http://localhost:3001
 
 
 
@@ -135,4 +136,4 @@ socket.connect(serverTest)  // servidor de sockets conectado
 serverTest.listen(config.port, function(){  //http://localhost:3003/app/socket.html
     console.log("La aplicación está escuchando en " + config.hostTest + ":" + config.port);
 })
-
+*/

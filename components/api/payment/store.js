@@ -130,7 +130,9 @@ function verifyAndRealicePayment(transactionId, code, dateTimeActual){
                             
                             const difference = fullMinutesDate2 - fullMinutesDate1
 
-                            if(difference <= 30 && difference >0){
+                            console.log(difference)
+
+                            if(difference <= 30 && difference >=-1){
 
                                 ModelAccount.findOne({_id: transaction.originAccount})
                                     .then((originAccount)=>{

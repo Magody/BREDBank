@@ -29,7 +29,6 @@ router.post('/', function(req, res){
     console.log(connIP)
 
 
-
     controller.authClient(req.body.user, req.body.password, connIP)
         .then((resultadoCompleto)=>{
             // resultadoCompleto ejemplo: {id: 2, cliente: cliente}
@@ -40,8 +39,7 @@ router.post('/', function(req, res){
             
 
             if (resultado == resultadosCodigos.ID_USUARIO_INCORRECTO.valor ){ //usuario no registrado
-                const a = codigoMalicioso.verificarCodigoMalicioso(req.body.user); //true si tiene código malicioso
-                console.log('codigo malicioso: ', a);
+                
                 //console.log("El usuario ingresado no está registrado")
                 response.success(req, res, resultadosCodigos.ID_USUARIO_INCORRECTO.mensaje, 200)
                 
@@ -62,14 +60,14 @@ router.post('/', function(req, res){
 
                     controller.notificarAccesoACliente(cliente._id);
                     console.log('cliente user:', cliente.user);
-                    res.redirect('/client/cambioCredenciales/?user='+ cliente.user);
+                    //res.redirect('/client/cambioCredenciales/?user='+ cliente.user);
                     // res.send('<form id="redirectCambioCredenciales" method="post" action="/client/cambioCredenciales">' +
                     // '<input type="hidden" name="user" value="'+ cliente.user+ '">' +
                     // '<input type="password" name="password" required>' +                   
                     // '</form>' +
                     // '<script>document.getElementById("redirectVerification").submit()</script>');
 
-                    //res.render("loginDenegado.ejs");
+                    res.render("loginDenegado.ejs");
                    
                    
                     
@@ -79,7 +77,7 @@ router.post('/', function(req, res){
                     
                     //es el primer logeo
                     
-                    /*controller.sendMail(cliente.email, "Verification email", "Your code is: "+cliente.verificationCode)
+                    controller.sendMail(cliente.email, "Verification email", "Your code is: "+cliente.verificationCode)
                         .then((enviado)=>{
                             
                             if(enviado){
@@ -98,7 +96,7 @@ router.post('/', function(req, res){
                         })
                         .catch(e=>{
                             response.error(req, res, "Error al enviar el correo", 500, e)
-                        })*/
+                        })
 
 
                         //esto solo para testear

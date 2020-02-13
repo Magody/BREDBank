@@ -18,6 +18,7 @@ function generateTransaction(clientSource, password, clientDest
 
 function sendMail(email, subject, message, transactionId){
 
+    console.log(message)
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", config.emailServiceHost, true);
