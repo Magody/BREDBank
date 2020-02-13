@@ -95,7 +95,8 @@ function notificarAccesoACliente(cliente){
 
     console.log(connIP)
     console.log("Sockets: ", listaSockets)
-    listaSockets[connIP].socket.emit("alertaIntruso", "Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales")
+    listaSockets[connIP].socket.emit("alertaIntruso", "Alguien ha intentado acceder a su cuenta, por favor le solicitamos el cambio de credenciales");
+    
 
 }
 

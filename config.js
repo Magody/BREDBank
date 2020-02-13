@@ -4,7 +4,7 @@ const config = {
 
     dbUrl: process.env.DB_URL || 'mongodb://localhost:27017/bred_bank',  //usa variable de entorno o la mia
     host: process.env.HOST || 'https://localhost',
-    IP_HOST: process.env.IP_HOST || '172.29.64.160',
+    IP_HOST: process.env.IP_HOST || '172.29.64.151',
     hostTest: process.env.HOST_TEST || 'http://localhost',
     port: process.env.PORT || 3000,
     publicRoute: process.env.PUBLIC_ROUTE || '/bank',

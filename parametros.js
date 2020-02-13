@@ -24,8 +24,23 @@ const resultadosCodigos = {
     
 }
 
+
+function verificarCodigoMalicioso(cadena){
+
+    var expreg = /^[A-z0-9@\.áéíóú\s]+$/;
+  
+    if(expreg.test(cadena) || cadena.contains() )
+      return false;
+    else 
+      return true; 
+
+}
+
+
+
 module.exports = {
     mongoDBTablesNames,
     movements,
-    resultadosCodigos
+    resultadosCodigos,
+    verificarCodigoMalicioso
 }

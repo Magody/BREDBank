@@ -42,8 +42,13 @@ function connect(server){
 
 }
 
+function pruebaDesconectar(ipOut){
+    delete listaSockets[ipOut];
+}
+
 module.exports = {
     connect,
     socket,
-    listaSockets
+    listaSockets,
+    pruebaDesconectar
 }

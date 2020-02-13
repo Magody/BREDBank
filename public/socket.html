@@ -9,17 +9,18 @@
         <h1>Mira la consola.</h1>
 
 
+
         <script>
         
         
             var socket = io.connect('http://172.29.64.160:3000/', {secure: true}, {
-            
-
+            //const config = require('../config')
+        
                 forceNew: true,  //que las conexiones siempre sean nuevas
             })
 
             //console.log(socket)
-
+        
             socket.on("mensaje", function(data){
                 console.log(data)
             }) 
@@ -30,16 +31,20 @@
 
 
             // ahora escucha mensajes (WebSockets)
-
+        
             /*window.addEventListener('beforeunload', function (e) { 
                 e.preventDefault(); 
                 e.returnValue = '';
                 socket.disconnect()
-
-
+        
+        
             }); */
 
 
         </script>
+
+
+
+
     </body>
 </html>

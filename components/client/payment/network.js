@@ -10,7 +10,7 @@ const controllerClient = require('../controller');
 
 router.get("/", function(request, response){
 
-    response.render('payments.ejs')
+    response.render('payments.ejs');
 })
 
 router.post('/', function(request, response){

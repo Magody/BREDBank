@@ -30,9 +30,9 @@ app.use(config.publicRoute, express.static('public'));
 
 app.get("/", function(request, response){
 
-    var ip = request.header('x-forwarded-for') || request.connection.remoteAddress;
+    //var ip = request.UserHostAddress;//request.header('x-forwarded-for') || request.connection.remoteAddress;
     
-    ip = ip.replace("::ffff:", "")  //reemplaza la sección de IPV6 y solo deja IPV4
+    //ip = ip.replace("::ffff:", "")  //reemplaza la sección de IPV6 y solo deja IPV4
 
     console.log("IP: " + ip)
     console.log(request.query)
@@ -80,6 +80,12 @@ app.get("/client/search", function(request, response){
     response.render('search.ejs',request.query);
 })
 
+app.get("/client/cambioCredenciales", function(request, response){
+
+    //console.log('Query:', request.query)
+    //console.log('Body:', request.body)
+    response.render('cambioCredenciales.ejs',request.query);
+})
 //app.listen(3001);
 
 
