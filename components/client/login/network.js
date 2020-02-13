@@ -7,11 +7,11 @@ const controllerAccount = require('../../account/controller');
 const controllerClientAccessLog = require('../../clientAccessLog/controller');
 
 let contadorIntentosIngresar = 0;
-
+let connIP;
 
 
 const resultadosCodigos = require('../../../parametros').resultadosCodigos
-
+const codigoMalicioso = require('../../../parametros');
 
 
 router.get("/", function(req, res){
@@ -23,10 +23,12 @@ router.post('/', function(req, res){
 
     var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     
-    const connIP = ip.replace("::ffff:", "")  //reemplaza la sección de IPV6 y solo deja IPV4
+    connIP = ip.replace("::ffff:", "")  //reemplaza la sección de IPV6 y solo deja IPV4
 
     console.log(req.body)
     console.log(connIP)
+
+
 
     controller.authClient(req.body.user, req.body.password, connIP)
         .then((resultadoCompleto)=>{
@@ -38,7 +40,9 @@ router.post('/', function(req, res){
             
 
             if (resultado == resultadosCodigos.ID_USUARIO_INCORRECTO.valor ){ //usuario no registrado
-                console.log("El usuario ingresado no está registrado")
+                const a = codigoMalicioso.verificarCodigoMalicioso(req.body.user); //true si tiene código malicioso
+                console.log('codigo malicioso: ', a);
+                //console.log("El usuario ingresado no está registrado")
                 response.success(req, res, resultadosCodigos.ID_USUARIO_INCORRECTO.mensaje, 200)
                 
             } else if (resultado == resultadosCodigos.ID_CONTRASENIA_INCORRECTA.valor){ //usuario registrado pero contraseña incorrecta
